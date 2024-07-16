@@ -1,0 +1,45 @@
+# This is an example compose file. That spins up a trackmania forever server with xaseco.
+# Just input the empty details and issue 'docker compose up'
+services:
+  trackmania:
+    image: evoesports/trackmaniaforever:latest
+    restart: unless-stopped
+    ports:
+      - 2350:2350/udp
+      - 2350:2350/tcp
+      - 3450:3450/udp
+      - 3450:3450/tcp
+    environment:
+      TMF_SERVER_NAME: "Phenom Labs"
+      TMF_MASTERSERVER_LOGIN: ""
+      TMF_MASTERSERVER_PASSWORD: ""
+      TMF_SYSTEM_XMLRPC_ALLOWREMOTE: "True"
+      TMF_SYSTEM_PACKMASK: "united"
+    volumes:
+      - "trackmania:/server/GameData"
+  xaseco:
+    image: evoesports/xaseco:latest
+    restart: unless-stopped
+    depends_on:
+      trackmania:
+        condition: service_healthy
+        restart: true
+    environment:
+      XASECO_TMSERVER_LOGIN: "SuperAdmin"
+      XASECO_TMSERVER_PASSWORD: "SuperAdmin"
+      XASECO_TMSERVER_IP: "trackmania"
+      XASECO_TMSERVER_PORT: "5000"
+      XASECO_MYSQL_SERVER: ""
+      XASECO_MYSQL_LOGIN: "xaseco"
+      XASECO_MYSQL_PASSWORD: ""
+      XASECO_MYSQL_DATABASE: "xaseco"
+      XASECO_DEDIMANIA_LOGIN: ""
+      XASECO_DEDIMANIA_PASSWORD: ""
+      XASECO_DEDIMANIA_NATION: ""
+      XASECO_MASTERADMINS: ""
+    volumes:
+      - "xaseco:/xaseco"
+      - "trackmania:/server/GameData"
+volumes:
+  xaseco: null
+  trackmania: null
