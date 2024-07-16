@@ -112,7 +112,7 @@ RUN true \
     && adduser -u 9999 -Hh /xaseco -G xaseco -s /sbin/nologin -D xaseco \
     && install -d -o xaseco -g xaseco -m 775 /xaseco \
     && chown xaseco:xaseco -Rf /xaseco \
-    && apk add --force-overwrite --no-cache bash \
+    && apk add --force-overwrite --no-cache bash procps \
     && true
 
 USER xaseco
@@ -120,6 +120,9 @@ USER xaseco
 COPY xaseco/xaseco.tar.gz /tmp
 
 COPY --chmod=0755 xaseco/entrypoint.sh /usr/local/bin/
+
+HEALTHCHECK --interval=5s --timeout=5s --start-period=20s --retries=3 \
+    CMD [ "/bin/sh", "-c", "pgrep -x php || exit 1" ]
 
 ENTRYPOINT ["entrypoint.sh"]
 CMD [ "/usr/local/bin/php", "/xaseco/aseco.php" ]
