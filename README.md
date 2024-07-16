@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/d3c26835-4d2e-4b4c-ad43-e6ac42a9b587" alt="Trackmania image" height="100"/>
+  <img src="https://github.com/user-attachments/assets/b903eb8c-f1ea-45f7-ae22-313498c1939c" alt="Trackmania image" height="100"/>
 <p align="center">
     <a href="https://hub.docker.com/r/evoesports/xaseco">
         <img src="https://img.shields.io/docker/stars/evoesports/xaseco?&style=flat-square"
