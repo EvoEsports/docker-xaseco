@@ -121,6 +121,8 @@ COPY xaseco/xaseco.tar.gz /tmp
 
 COPY --chmod=0755 xaseco/entrypoint.sh /usr/local/bin/
 
+STOPSIGNAL SIGKILL
+
 HEALTHCHECK --interval=5s --timeout=5s --start-period=20s --retries=3 \
     CMD [ "/bin/sh", "-c", "pgrep -x php || exit 1" ]
 
