@@ -50,6 +50,7 @@ services:
       TMF_MASTERSERVER_PASSWORD: "YOUR_MASTERSERVER_PASSWORD"
       TMF_SYSTEM_XMLRPC_ALLOWREMOTE: "True"
       TMF_SYSTEM_PACKMASK: "united"
+      TMF_SYSTEM_FORCE_IP_ADDRESS: "YOUR_EXTERNAL_IPV4:PORT"
     volumes:
       - "trackmania:/server/GameData"
   xaseco:
